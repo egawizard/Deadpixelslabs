@@ -255,7 +255,7 @@ body:before{
   </header>
 
   <section class="icons">
-    <button class="icon" data-open="mintWin"><span class="glyph">◎</span>MINT.EXE</button>
+    <button class="icon" data-open="mintWin"><span class="glyph">◎</span>COLLECTION.EXE</button>
     <button class="icon" data-open="checkerWin"><span class="glyph">⌁</span>CHECKER.SYS</button>
     <a class="icon" href="https://claim.deadpixelslabs.xyz/" target="_blank" rel="noopener"><span class="glyph">＋</span>CLAIM.WL</a>
     <button class="icon" data-open="archiveWin"><span class="glyph">▦</span>ARCHIVE</button>
@@ -281,26 +281,26 @@ body:before{
   <div class="mobile-label">OPEN WINDOWS</div>
 
   <section class="window open" id="mintWin">
-    <div class="titlebar"><span>MINT_ACCESS.EXE</span><div class="win-actions"><button data-close>×</button></div></div>
+    <div class="titlebar"><span>COLLECTION_VIEWER.EXE</span><div class="win-actions"><button data-close>×</button></div></div>
     <div class="win-body">
-      <div class="kicker">ADMISSION / DEAD PIXELS</div>
-      <div class="huge">THE GLITCH<br><em>GOES LIVE.</em></div>
-      <div class="copy">Minting takes place on OpenSea. Free mint. Whitelist access only. No public mint.</div>
+      <div class="kicker">POST-MINT / DEAD PIXELS</div>
+      <div class="huge">THE ARCHIVE<br><em>IS OPEN.</em></div>
+      <div class="copy">Minting is complete. 7,777 corrupted souls are now on Robinhood Chain. Explore the collection on OpenSea.</div>
       <div class="ticket">
         <div class="ticket-main">
-          <div class="kicker">MINT TICKET // SEPTEMBER 8 // 3:00 PM UTC</div>
-          <div class="countdown" id="countdown">--:--:--</div>
+          <div class="kicker">COLLECTION STATUS // DEAD PIXELS</div>
+          <div class="countdown">SOLD OUT</div>
           <div class="ticket-grid">
-            <div><span>OG GTD</span><b>MAX 3</b></div>
-            <div><span>FCFS</span><b>MAX 2</b></div>
-            <div><span>PRICE</span><b>FREE</b></div>
+            <div><span>STATUS</span><b>SOLD OUT</b></div>
+            <div><span>REVEAL</span><b>IN PROGRESS</b></div>
+            <div><span>CHAIN</span><b>ROBINHOOD</b></div>
             <div><span>SUPPLY</span><b>7,777</b></div>
           </div>
         </div>
-        <div class="ticket-stub">ACCESS</div>
+        <div class="ticket-stub">ARCHIVE</div>
       </div>
       <div class="action-row">
-        <a class="btn acid" href="https://opensea.io/collection/dead-pixels-labs/" target="_blank" rel="noopener">MINT ON OPENSEA ↗</a>
+        <a class="btn acid" href="https://opensea.io/collection/dead-pixels-labs/overview" target="_blank" rel="noopener">VIEW COLLECTION ↗</a>
         <a class="btn" href="https://checker.deadpixelslabs.xyz/" target="_blank" rel="noopener">CHECK ELIGIBILITY ↗</a>
       </div>
     </div>
@@ -391,7 +391,7 @@ body:before{
     <button data-open="cultureWin">CULTURE</button>
     <a href="https://checker.deadpixelslabs.xyz/" target="_blank" rel="noopener">CHECKER</a>
     <a href="https://claim.deadpixelslabs.xyz/" target="_blank" rel="noopener">CLAIM WL</a>
-    <a class="mint" href="https://opensea.io/collection/dead-pixels-labs/" target="_blank" rel="noopener">OPENSEA ↗</a>
+    <a class="mint" href="https://opensea.io/collection/dead-pixels-labs/overview" target="_blank" rel="noopener">VIEW COLLECTION ↗</a>
   </nav>
 </main>
 
@@ -420,10 +420,6 @@ for(let i=0;i<92;i++){
 function tick(){
  const d=new Date();
  document.getElementById('clock').textContent=d.toUTCString().slice(17,25)+' UTC';
- const target=new Date('2026-09-08T15:00:00Z');
- let diff=Math.max(0,target-d);
- const h=Math.floor(diff/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1000);
- document.getElementById('countdown').textContent=[h,m,s].map(v=>String(v).padStart(2,'0')).join(':');
 }
 tick();setInterval(tick,1000);
 

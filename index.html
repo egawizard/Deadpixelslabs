@@ -121,7 +121,6 @@ body:before{
 #cultureWin{left:12vw;bottom:10vh;width:455px}
 #archiveWin{left:19vw;top:11vh;width:680px}
 #aboutWin{right:8vw;bottom:10vh;width:460px}
-#checkerWin{left:29vw;top:19vh;width:500px}
 
 .ticket{
  border:2px solid #0a0a0a;display:grid;grid-template-columns:1fr 110px;margin-top:16px;position:relative;overflow:hidden
@@ -209,6 +208,137 @@ body:before{
 
 .mobile-label{display:none}
 
+
+/* === PORTAL NOTICE / POST-MINT SIGNAL === */
+.portal-notice{
+ position:fixed;
+ left:50%;
+ bottom:82px;
+ transform:translateX(-50%);
+ z-index:38;
+ width:min(760px,calc(100vw - 390px));
+ min-width:520px;
+ min-height:154px;
+ display:grid;
+ grid-template-columns:150px 1fr;
+ align-items:center;
+ gap:18px;
+ padding:18px 24px 18px 18px;
+ border:2px solid #0a0a0a;
+ outline:1px solid rgba(255,255,255,.18);
+ background:
+   repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 4px),
+   linear-gradient(115deg,#070707 0%,#111 62%,#080808 100%);
+ color:#f3efe5;
+ text-decoration:none;
+ box-shadow:10px 10px 0 rgba(0,0,0,.42);
+ overflow:hidden;
+ isolation:isolate;
+ transition:transform .16s ease,box-shadow .16s ease;
+}
+.portal-notice:hover{
+ transform:translateX(-50%) translate(-3px,-3px);
+ box-shadow:14px 14px 0 rgba(0,0,0,.5);
+}
+.portal-notice:before{
+ content:"";
+ position:absolute;
+ inset:0;
+ z-index:-1;
+ background:linear-gradient(90deg,transparent 0 68%,rgba(195,255,35,.08) 68% 69%,transparent 69% 100%);
+ animation:portalSweep 3.2s steps(2,end) infinite;
+}
+.portal-content{position:relative;z-index:3;min-width:0}
+.portal-eyebrow{
+ font:700 10px "Courier New",monospace;
+ letter-spacing:.13em;
+ color:#c9c6bf;
+ text-transform:uppercase;
+ margin-bottom:10px;
+}
+.portal-eyebrow b{
+ display:inline-block;width:7px;height:7px;margin-right:7px;
+ background:var(--acid);box-shadow:0 0 14px var(--acid);
+ animation:portalBlink .9s steps(1,end) infinite;
+}
+.portal-title{
+ position:relative;
+ font:900 clamp(30px,3.6vw,58px)/.85 Arial Black,Impact,sans-serif;
+ letter-spacing:-.07em;
+ text-transform:uppercase;
+ white-space:nowrap;
+}
+.portal-title em{font-style:normal;color:var(--acid)}
+.portal-title:before,.portal-title:after{
+ content:attr(data-text);
+ position:absolute;
+ left:0;top:0;
+ width:100%;
+ overflow:hidden;
+ opacity:.18;
+ pointer-events:none;
+}
+.portal-title:before{transform:translate(2px,-1px);clip-path:inset(18% 0 60% 0)}
+.portal-title:after{transform:translate(-2px,2px);clip-path:inset(68% 0 9% 0)}
+.portal-url{
+ margin-top:12px;
+ padding-top:9px;
+ border-top:1px dashed #565656;
+ font:700 12px "Courier New",monospace;
+ letter-spacing:.06em;
+ color:#f3efe5;
+}
+.portal-url strong{color:var(--acid);font-size:16px}
+.portal-orbit{
+ position:relative;
+ width:124px;height:124px;
+ display:grid;place-items:center;
+ margin:auto;
+}
+.portal-orbit:before{
+ content:"";
+ position:absolute;inset:8px;
+ border-radius:50%;
+ border:1px solid rgba(195,255,35,.62);
+ box-shadow:0 0 28px rgba(195,255,35,.14),inset 0 0 22px rgba(195,255,35,.09);
+ animation:portalSpin 8s linear infinite;
+}
+.portal-orbit:after{
+ content:"";
+ width:54px;height:54px;border-radius:50%;
+ background:#000;
+ border:1px solid #2a2a2a;
+ box-shadow:0 0 0 9px rgba(255,255,255,.025),0 0 34px rgba(195,255,35,.12);
+}
+.portal-orbit span{
+ position:absolute;width:84px;height:14px;
+ border-top:2px solid var(--acid);
+ border-radius:50%;
+ transform:rotate(-17deg);
+ filter:drop-shadow(0 0 4px rgba(195,255,35,.65));
+}
+.portal-orbit i{
+ position:absolute;
+ width:6px;height:6px;
+ background:#e9e6df;
+ box-shadow:0 0 0 1px #000;
+}
+.portal-orbit i:nth-child(1){left:10px;top:33px}
+.portal-orbit i:nth-child(2){right:12px;bottom:31px;width:9px;height:4px}
+.portal-orbit i:nth-child(3){right:23px;top:17px;width:4px;height:9px;background:var(--acid)}
+.portal-scan{
+ position:absolute;
+ left:0;right:0;height:2px;top:-5%;
+ background:rgba(195,255,35,.44);
+ box-shadow:0 0 9px rgba(195,255,35,.55);
+ animation:portalScan 3.5s linear infinite;
+ opacity:.55;
+}
+@keyframes portalSpin{to{transform:rotate(360deg)}}
+@keyframes portalBlink{0%,45%{opacity:1}46%,70%{opacity:.18}71%,100%{opacity:1}}
+@keyframes portalScan{0%{top:-4%}100%{top:104%}}
+@keyframes portalSweep{0%,85%{transform:translateX(-35%)}90%{transform:translateX(15%)}100%{transform:translateX(55%)}}
+
 @media(max-width:760px){
  html,body{overflow:auto;background:#070707}
  #desktop{position:relative;min-height:100svh;height:auto;overflow:hidden;padding-bottom:90px}
@@ -222,6 +352,27 @@ body:before{
  .hero-word .big:nth-child(2){margin-left:0}
  .hero-word .micro{font-size:10px}
  .sticker{position:relative;right:auto;bottom:auto;z-index:8;margin:0 18px 18px;width:auto;transform:rotate(-1deg)}
+
+ .portal-notice{
+   position:relative;
+   left:auto;bottom:auto;
+   transform:none!important;
+   z-index:14;
+   width:auto;min-width:0;min-height:0;
+   margin:0 14px 24px;
+   grid-template-columns:86px 1fr;
+   gap:12px;
+   padding:14px;
+   box-shadow:7px 7px 0 rgba(0,0,0,.45);
+ }
+ .portal-notice:hover{transform:none;box-shadow:7px 7px 0 rgba(0,0,0,.45)}
+ .portal-orbit{width:76px;height:76px}
+ .portal-orbit:after{width:34px;height:34px}
+ .portal-orbit span{width:58px;height:10px}
+ .portal-title{font-size:clamp(28px,9.2vw,44px);white-space:normal}
+ .portal-eyebrow{font-size:8px;margin-bottom:7px}
+ .portal-url{font-size:10px;margin-top:8px;padding-top:7px}
+
  .window{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;margin:12px 12px 24px;max-width:none;min-width:0;width:auto!important;display:none}
  .window.open{display:block}
  .titlebar{cursor:default}
@@ -256,8 +407,6 @@ body:before{
 
   <section class="icons">
     <button class="icon" data-open="mintWin"><span class="glyph">◎</span>COLLECTION.EXE</button>
-    <button class="icon" data-open="checkerWin"><span class="glyph">⌁</span>CHECKER.SYS</button>
-    <a class="icon" href="https://claim.deadpixelslabs.xyz/" target="_blank" rel="noopener"><span class="glyph">＋</span>CLAIM.WL</a>
     <button class="icon" data-open="archiveWin"><span class="glyph">▦</span>ARCHIVE</button>
     <button class="icon" data-open="cultureWin"><span class="glyph">✦</span>CULTURE.TXT</button>
     <a class="icon" href="https://discord.com/invite/RjArEWVgF" target="_blank" rel="noopener"><span class="glyph">☍</span>DISCORD.LNK</a>
@@ -278,6 +427,20 @@ body:before{
     <small>THE GLITCH CONTINUES.<br>ERROR MAKES US UNIQUE.</small>
   </aside>
 
+  <a class="portal-notice" href="https://portal.deadpixelslabs.com/" target="_blank" rel="noopener" aria-label="Enter DEAD PIXELS portal">
+    <div class="portal-orbit" aria-hidden="true">
+      <i></i><i></i><i></i>
+      <span></span>
+    </div>
+    <div class="portal-content">
+      <div class="portal-eyebrow"><b></b> NEW SIGNAL DETECTED // PORTAL.EXE</div>
+      <div class="portal-title" data-text="ENTER THE PORTAL">ENTER THE <em>PORTAL</em></div>
+      <div class="portal-url">portal.deadpixelslabs.com <strong>↗</strong></div>
+    </div>
+    <div class="portal-scan" aria-hidden="true"></div>
+  </a>
+
+
   <div class="mobile-label">OPEN WINDOWS</div>
 
   <section class="window open" id="mintWin">
@@ -292,7 +455,7 @@ body:before{
           <div class="countdown">SOLD OUT</div>
           <div class="ticket-grid">
             <div><span>STATUS</span><b>SOLD OUT</b></div>
-            <div><span>REVEAL</span><b>IN PROGRESS</b></div>
+            <div><span>REVEAL</span><b>COMPLETE</b></div>
             <div><span>CHAIN</span><b>ROBINHOOD</b></div>
             <div><span>SUPPLY</span><b>7,777</b></div>
           </div>
@@ -301,7 +464,6 @@ body:before{
       </div>
       <div class="action-row">
         <a class="btn acid" href="https://opensea.io/collection/dead-pixels-labs/overview" target="_blank" rel="noopener">VIEW COLLECTION ↗</a>
-        <a class="btn" href="https://checker.deadpixelslabs.xyz/" target="_blank" rel="noopener">CHECK ELIGIBILITY ↗</a>
       </div>
     </div>
   </section>
@@ -313,7 +475,7 @@ body:before{
       <div class="huge">CULTURE<br>BEFORE <em>UTILITY.</em></div>
       <div class="copy">
         DEAD PIXELS was created to build NFT culture on Robinhood Chain.<br><br>
-        If you're a real human — or already one of the chain's top NFT holders — you deserve a place in the archive.
+        The archive is live. The culture keeps moving, and the glitch keeps spreading across Robinhood Chain.
       </div>
       <div class="ruleline"></div>
       <div class="copy"><span class="redacted">utility roadmap alpha staking yield</span> — we deleted that part.</div>
@@ -339,7 +501,7 @@ body:before{
           <div class="archive-status"><span>SCAN MODE // <b>ARCHIVE LIVE</b></span><span>ERROR MAKES US UNIQUE</span></div>
           <div class="headline">DEAD PIXELS<br><em>ARCHIVE FILE</em></div>
           <div class="archive-copy">7,777 corrupted identities stored inside the archive. Just pixels, culture, and a permanent glitch on Robinhood Chain.</div>
-          <div class="archive-quote">TOP NFT HOLDERS ALSO QUALIFY // WHITELIST ACCESS ONLY</div>
+          <div class="archive-quote">ARCHIVE LIVE // 7,777 CORRUPTED SOULS</div>
           <div class="archive-bars">
             <div><span>Supply</span><b>7,777</b></div>
             <div><span>Rarity Tiers</span><b>05</b></div>
@@ -353,22 +515,6 @@ body:before{
       <div class="spec-row"><b>RARE</b><span>HEAVY CORRUPTION</span><span>778</span></div>
       <div class="spec-row"><b>EPIC</b><span>SYSTEM DAMAGE</span><span>311</span></div>
       <div class="spec-row"><b>LEGENDARY</b><span>ERRORS THAT SURVIVED</span><span>78</span></div>
-    </div>
-  </section>
-
-  <section class="window" id="checkerWin">
-    <div class="titlebar"><span>CHECKER.SYS</span><div class="win-actions"><button data-close>×</button></div></div>
-    <div class="win-body">
-      <div class="kicker">ACCESS DATABASE</div>
-      <div class="huge">ARE YOU<br><em>IN?</em></div>
-      <div class="copy">The official checker is live. OG GTD wallets also receive FCFS access.</div>
-      <div class="checkerbox">
-        <input value="0x........................................" readonly aria-label="wallet example">
-        <div class="fake-result">LOCAL ACCESS: <strong>REDIRECT REQUIRED</strong></div>
-      </div>
-      <div class="action-row">
-        <a class="btn primary" href="https://checker.deadpixelslabs.xyz/" target="_blank" rel="noopener">OPEN CHECKER ↗</a>
-      </div>
     </div>
   </section>
 
@@ -389,8 +535,6 @@ body:before{
     <button data-open="aboutWin">ABOUT</button>
     <button data-open="archiveWin">ARCHIVE</button>
     <button data-open="cultureWin">CULTURE</button>
-    <a href="https://checker.deadpixelslabs.xyz/" target="_blank" rel="noopener">CHECKER</a>
-    <a href="https://claim.deadpixelslabs.xyz/" target="_blank" rel="noopener">CLAIM WL</a>
     <a class="mint" href="https://opensea.io/collection/dead-pixels-labs/overview" target="_blank" rel="noopener">VIEW COLLECTION ↗</a>
   </nav>
 </main>
